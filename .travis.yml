@@ -5,16 +5,9 @@ jdk:
 - oraclejdk7
 - oraclejdk8
 before_install:
-- export S3_BASE="http://stormpath-sdk-java-travis-setup.s3-website-us-east-1.amazonaws.com"
-- export ENC_TARBALL="stormpath_travis_setup.tar.enc"
-- export AUTHOR=$(git show --format="%ae" | head -n 1)
-- test $TRAVIS_BRANCH = master && MIDDLE="/" || MIDDLE="/$AUTHOR/"
-- export ENC_TARBALL_URL=$S3_BASE$MIDDLE$ENC_TARBALL
-- wget $ENC_TARBALL_URL
-- if [ -e $ENC_TARBALL ]; then echo "$ENC_TARBALL_URL found. Proceeding."; else echo "$ENC_TARBALL_URL not found. Exiting."; exit 1; fi
-- openssl aes-256-cbc -K $encrypted_0b7f5d43be1f_key -iv $encrypted_0b7f5d43be1f_iv -in stormpath_travis_setup.tar.enc -out stormpath_travis_setup.tar -d
-- tar xvf stormpath_travis_setup.tar
+- ./travis_bootstrap.sh
 - source env.sh
+- source stormpath_env.sh
 - cp id_rsa_stormpath.github.io ~/.ssh/id_rsa 
 - chmod 600 ~/.ssh/id_rsa
 - mkdir -p ~/.stormpath/clover

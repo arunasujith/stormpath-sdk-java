@@ -244,7 +244,7 @@ public abstract class AbstractStormpathWebMvcConfiguration {
     @Value("#{ @environment['stormpath.web.account.jwt.ttl'] ?: 259200 }") //3 days by default
     protected long accountJwtTtl;
 
-    @Value("#{ @environment['stormpath.web.account.jwt.signatureAlgorithm'] ?: 'HS256' }") //3 days by default
+    @Value("#{ @environment['stormpath.web.account.jwt.signatureAlgorithm'] ?: 'HS256' }")
     protected SignatureAlgorithm accountJwtSignatureAlgorithm;
 
     // ================  HTTP Servlet Request behavior  ===================
@@ -1173,8 +1173,7 @@ public abstract class AbstractStormpathWebMvcConfiguration {
                 try {
                     return springMessageSource.getMessage(key, args, locale);
                 } catch (NoSuchMessageException e) {
-                    //Same behavior as com.stormpath.sdk.servlet.i18n.DelegatingMessageSource
-                    log.warn("i18n key not found", e);
+                    //Same behavior as com.stormpath.sdk.servlet.i18n.DefaultMessageSource
                     return defaultMessage;
                 }
             }
@@ -1184,8 +1183,7 @@ public abstract class AbstractStormpathWebMvcConfiguration {
                 try {
                     return springMessageSource.getMessage(key, new Object[0], locale);
                 } catch (NoSuchMessageException e) {
-                    //Same behavior as com.stormpath.sdk.servlet.i18n.DelegatingMessageSource
-                    log.warn("i18n key not found", e);
+                    //Same behavior as com.stormpath.sdk.servlet.i18n.DefaultMessageSource
                     return defaultMessage;
                 }
             }
@@ -1195,8 +1193,7 @@ public abstract class AbstractStormpathWebMvcConfiguration {
                 try {
                     return springMessageSource.getMessage(key, args, locale);
                 } catch (NoSuchMessageException e) {
-                    //Same behavior as com.stormpath.sdk.servlet.i18n.DelegatingMessageSource
-                    log.warn("i18n key not found", e);
+                    //Same behavior as com.stormpath.sdk.servlet.i18n.DefaultMessageSource
                     return '!' + key + '!';
                 }
             }
